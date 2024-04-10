@@ -49,7 +49,7 @@ class Client:
         """
         self.http.refresh()
 
-    def get_account_info(self, public_key: PublicKey | Text, commitment: Optional[Commitment]=None) -> RPCResponse[AccountInfoType] | AccountInfo:
+    def get_account_info(self, public_key: PublicKey | Text, commitment: Optional[any]=None) -> RPCResponse[AccountInfoType] | AccountInfo:
         """
         Returns all the account info for the specified public key.
 
@@ -60,7 +60,7 @@ class Client:
         Returns:
             RPCResponse: The response from the RPC endpoint.
         """
-        commitment = validate_commitment(commitment) if commitment else None
+        # commitment = validate_commitment(commitment) if commitment else None
         response = self.build_and_send_request("getAccountInfo", [public_key, commitment])
         if self.clean_response:
             if response['value'] == None:
